@@ -5,6 +5,7 @@ import { app } from "./app.js";
 dotenv.config({
     path:'./'
 })
+console.log("MONGODB_URL:", process.env.MONGODB_URL);
 
 connectDB()
 
