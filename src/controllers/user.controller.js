@@ -30,15 +30,15 @@ const registerUser=asyncHandler(async(req,res)=>{
   ) {
     throw new ApiError(400, 'All fieldes are  requaired')
   }
-  const exittedUser=User.findOne({
+  const exittedUser=await User.findOne({
     $or:[{username},{email}]
   })
     if (exittedUser) {
         throw new ApiError(409,"Users with email or username already exits")
     }
 
-    const avatarLocalPath= req.fiels?.avatar[0]?.path;
-    const coveerImageLocalPath=req.fiels?.coverImage[0]?.path
+    const avatarLocalPath= req.files?.avatar[0]?.path;
+    const coveerImageLocalPath=req.files?.coverImage[0]?.path
     if (!avatarLocalPath) {
         throw new ApiError(400,"avatra files is requaried")
     }
