@@ -9,8 +9,6 @@ console.log("MONGODB_URL:", process.env.MONGODB_URL);
 
 connectDB()
 
- 
-
 .then(()=>{
     app.listen(process.env.PORT || 8000,()=>{
         console.log(`server is running at port :${process.env.PORT}`)
@@ -21,8 +19,8 @@ connectDB()
         throw error
     })
 })
-.catch((err)=>{
-    console.log(" MONGO db connection failed !!!",err)
+.catch((error)=>{
+    console.log(" MONGO db connection failed !!!",error)
 })
 
  

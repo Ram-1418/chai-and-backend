@@ -31,6 +31,7 @@ const registerUser = asyncHandler(async (req, res) => {
   ) {
     throw new ApiError(400, 'All fieldes are  requaired')
   }
+  console.log('exitt', exittedUser)
   const exittedUser = await User.findOne({
     $or: [{ username }, { email }]
   })
@@ -45,6 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const avatar = await uploadOnCloudinary(avatarLocalPath)
+
   const coverImage = await uploadOnCloudinary(coveerImageLocalPath)
 
   const user = await User.create({
