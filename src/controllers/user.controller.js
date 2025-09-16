@@ -3,8 +3,8 @@ import { ApiError } from "../utils/ApiError.js"
 import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
-import { JsonWebTokenError } from "jsonwebtoken"
-import { use } from "react"
+
+
 
 
 const generateAccessAndRefereshTokens = async (userId) => {
@@ -85,7 +85,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!(username || !email)) {
     throw new ApiError(400, "username or email i srequaried")
   }
-
+console.log(`User logged in: ${user.username} (${user.email})`);
   const user = await User.findOne({
     $or: [{ username }, { email }]
   })
@@ -94,7 +94,8 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(404, "user does not exit")
   }
 
-  const isPasswordValid = await user.isPasswordCorrect(password)
+  const isPasswordValid = await user.isPasswordCorrect(password);
+
 
   if (!isPasswordValid) {
     throw new ApiError(401, "Ibvalid user credentials")
